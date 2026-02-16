@@ -1,0 +1,445 @@
+/* ===============================
+   IMPORTAÇÃO DA FONTE (Poppins)
+   =============================== */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+/* ===============================
+   RESET GLOBAL
+   =============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===============================
+   TOKENS / VARIÁVEIS GLOBAIS
+   (cores, sombras, tamanhos)
+   =============================== */
+:root {
+  /* Base */
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --text: #18191a;
+  --muted: rgba(24, 25, 26, 0.7);
+
+  /* Acentos (mudam por tema) */
+  --accent: #2d9cdb;
+  --accent-2: #56ccf2;
+
+  /* Estado/alerta (aparece nos gradientes) */
+  --danger: #e74c3c;
+
+  /* Sombras */
+  --shadow: 0 15px 25px rgba(0, 0, 0, 0.08),
+    0 25px 45px rgba(0, 0, 0, 0.08);
+
+  /* “Anel” de foco (acessibilidade) */
+  --ring: 0 0 0 4px rgba(45, 156, 219, 0.25);
+
+  /* Tamanhos responsivos do relógio */
+  --clock-size: clamp(260px, 72vw, 400px);
+  --clock-border: clamp(7px, 2vw, 12px);
+  --clock-inner-ring: clamp(8px, 2.2vw, 10px);
+  --clock-inset: clamp(14px, 4vw, 20px);
+}
+
+/* ===============================
+   TEMAS (sobrescrevem variáveis)
+   =============================== */
+body[data-theme="ocean"] {
+  --accent: #2d9cdb;
+  --accent-2: #56ccf2;
+  --ring: 0 0 0 4px rgba(45, 156, 219, 0.25);
+}
+
+body[data-theme="sunset"] {
+  --accent: #f2994a;
+  --accent-2: #eb5757;
+  --ring: 0 0 0 4px rgba(242, 153, 74, 0.25);
+}
+
+body[data-theme="forest"] {
+  --accent: #27ae60;
+  --accent-2: #6fcf97;
+  --ring: 0 0 0 4px rgba(39, 174, 96, 0.25);
+}
+
+/* ===============================
+   PÁGINA (layout central)
+   =============================== */
+body {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  background: var(--bg);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* “Luz”/gradientes no fundo (decorativo) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+
+  /* 3 manchas de luz como na imagem */
+  background:
+    radial-gradient(900px 420px at 15% 10%, rgba(86, 204, 242, 0.30), transparent 60%),
+    radial-gradient(900px 420px at 85% 15%, rgba(45, 156, 219, 0.25), transparent 60%),
+    radial-gradient(900px 420px at 50% 95%, rgba(231, 76, 60, 0.12), transparent 60%);
+
+  filter: saturate(1.1);
+}
+
+/* ===============================
+   MODO ESCURO (troca tokens)
+   =============================== */
+body.dark {
+  --bg: #111213;
+  --surface: #18191a;
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.75);
+
+  /* sombra mais forte no dark */
+  --shadow: 0 15px 30px rgba(0, 0, 0, 0.35),
+    0 35px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* ===============================
+   CONTAINER PRINCIPAL
+   =============================== */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+  padding: 28px 18px;
+
+  /* limita largura como no layout */
+  width: min(900px, 100%);
+}
+
+/* ===============================
+   HEADER / TOPBAR
+   =============================== */
+.topbar {
+  width: min(760px, 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  padding: 14px 16px;
+  border-radius: 16px;
+
+  /* “cartão” translúcido */
+  background: color-mix(in oklab, var(--surface) 80%, transparent);
+
+  /* sombra + blur (efeito vidro) */
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+
+  position: relative;
+  z-index: 1;
+}
+
+/* ===============================
+   BLOCO “READOUT” (digital)
+   =============================== */
+.readout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+
+  padding: 8px 12px;
+  border-radius: 14px;
+
+  background: color-mix(in oklab, var(--surface) 70%, transparent);
+  border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+
+  min-width: 150px;
+}
+
+/* Hora digital (ex.: 12:34:56) */
+.readout__time {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.6px;
+  font-weight: 650;
+  font-size: 14px;
+}
+
+/* Data (ex.: 16 Feb 2026) */
+.readout__date {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ===============================
+   MARCA (Makos Tech / Analog Clock)
+   =============================== */
+.brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand__name {
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: 0.2px;
+}
+
+.brand__tag {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ===============================
+   CONTROLES (tema + dark mode)
+   =============================== */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Grupo de botões de tema */
+.theme-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 6px;
+  border-radius: 14px;
+
+  background: color-mix(in oklab, var(--surface) 65%, transparent);
+  border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+}
+
+/* Botões do tema */
+.theme-btn {
+  appearance: none;
+  border: 1px solid transparent;
+
+  padding: 8px 10px;
+  border-radius: 10px;
+
+  background: transparent;
+  color: var(--text);
+
+  font-size: 13px;
+  cursor: pointer;
+
+  /* animação curta como na imagem */
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+/* Hover: “levanta” um pouco e ganha fundo */
+.theme-btn:hover {
+  transform: translateY(-1px);
+  background: color-mix(in oklab, var(--surface) 75%, transparent);
+  border-color: color-mix(in oklab, var(--text) 16%, transparent);
+}
+
+/* Botão ativo (selecionado) */
+.theme-btn.is-active {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--accent) 88%, white),
+    color-mix(in oklab, var(--accent-2) 88%, white)
+  );
+
+  border-color: color-mix(in oklab, var(--text) 10%, transparent);
+  color: #0b0c0d;
+}
+
+/* Foco por teclado (acessível) */
+.theme-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+/* ===============================
+   BOTÃO “DARK MODE”
+   =============================== */
+.mode-switch {
+  padding: 10px 20px;
+  border-radius: 8px;
+
+  font-size: 16px;
+  font-weight: 400;
+
+  display: inline-block;
+
+  /* texto claro em cima do gradiente */
+  color: var(--surface);
+
+  /* gradiente escuro com um toque do accent-2 */
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--text) 92%, var(--accent)),
+    color-mix(in oklab, var(--text) 92%, var(--accent-2))
+  );
+
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
+  cursor: pointer;
+  user-select: none;
+}
+
+.mode-switch:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+/* ===============================
+   RELÓGIO (CÍRCULO)
+   =============================== */
+.container .clock {
+  display: flex;
+  height: var(--clock-size);
+  width: var(--clock-size);
+  border-radius: 50%;
+
+  align-items: center;
+  justify-content: center;
+
+  background: color-mix(in oklab, var(--surface) 88%, transparent);
+  box-shadow: var(--shadow);
+
+  position: relative;
+  z-index: 1;
+
+  /* borda externa colorida */
+  border: var(--clock-border) solid
+    color-mix(in oklab, var(--accent) 55%, var(--text));
+
+  /* contorno suave */
+  outline: 2px solid color-mix(in oklab, var(--text) 12%, transparent);
+  outline-offset: 4px;
+}
+
+/* Anel interno do relógio */
+.container .clock::after {
+  content: "";
+  position: absolute;
+  inset: var(--clock-inner-ring);
+  border-radius: 50%;
+  pointer-events: none;
+
+  border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+  opacity: 0.9;
+}
+
+/* ===============================
+   NÚMEROS DO RELÓGIO
+   =============================== */
+.clock label {
+  position: absolute;
+  inset: var(--clock-inset);
+  text-align: center;
+
+  /* gira o “suporte” do número */
+  transform: rotate(calc(var(--i) * (360deg / 12)));
+}
+
+/* gira o número de volta para ficar “reto” */
+.clock label span {
+  display: inline-block;
+
+  font-size: clamp(18px, 5.5vw, 30px);
+  font-weight: 600;
+  color: var(--text);
+
+  transform: rotate(calc(var(--i) * (-360deg / 12)));
+}
+
+/* ===============================
+   CENTRO E PONTEIROS
+   =============================== */
+.container .indicator {
+  position: absolute;
+
+  height: clamp(8px, 2.2vw, 10px);
+  width: clamp(8px, 2.2vw, 10px);
+
+  display: flex;
+  justify-content: center;
+}
+
+/* bolinha central */
+.indicator::before {
+  content: "";
+  position: absolute;
+
+  height: 100%;
+  width: 100%;
+
+  border-radius: 50%;
+  z-index: 100;
+
+  background: var(--text);
+
+  /* aro colorido */
+  border: clamp(3px, 1vw, 4px) solid var(--accent);
+}
+
+/* Ponteiros (base) */
+.indicator .hand {
+  position: absolute;
+
+  /* tamanho padrão (ponteiro de segundos) */
+  height: calc(var(--clock-size) * 0.325);
+  width: clamp(3px, 0.9vw, 4px);
+
+  bottom: 0;
+  border-radius: 25px;
+
+  /* gira pelo “pé” */
+  transform-origin: bottom;
+
+  background: var(--accent);
+
+  /* deixa a rotação suave */
+  transition: transform 120ms linear;
+}
+
+/* Ponteiro minuto */
+.hand.minute {
+  height: calc(var(--clock-size) * 0.30);
+  width: clamp(4px, 1.1vw, 5px);
+  background: var(--text);
+}
+
+/* Ponteiro hora */
+.hand.hour {
+  height: calc(var(--clock-size) * 0.25);
+  width: clamp(6px, 1.6vw, 8px);
+  background: var(--text);
+}
+
+/* ===============================
+   MOBILE (como aparece na imagem)
+   =============================== */
+@media (max-width: 520px) {
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .readout {
+    align-items: flex-start;
+    min-width: unset;
+    width: 100%;
+  }
+
+  .controls {
+    justify-content: space-between;
+  }
+}

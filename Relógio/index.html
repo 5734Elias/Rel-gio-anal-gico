@@ -1,0 +1,133 @@
+<!-- Define o tipo do documento como HTML5 -->
+<!DOCTYPE html>
+
+<!-- Início do documento HTML e definição do idioma -->
+<html lang="en">
+
+<head>
+  <!-- Define o padrão de codificação de caracteres -->
+  <meta charset="UTF-8" />
+
+  <!-- Garante compatibilidade com versões antigas do Internet Explorer -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Configuração para responsividade (ajuste em dispositivos móveis) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Título que aparece na aba do navegador -->
+  <title>Makos Tech • Analog Clock</title>
+
+  <!-- Importação do arquivo CSS externo -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Importação do JavaScript com atributo defer
+       (faz o script rodar somente após o carregamento do HTML) -->
+  <script src="main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Container principal que envolve todo o conteúdo -->
+  <div class="container">
+
+    <!-- =========================
+         TOPO / CONTROLES
+         ========================= -->
+    <header class="topbar">
+
+      <!-- Área da marca / título -->
+      <div class="brand">
+        <div class="brand__name">Makos Tech</div>
+        <div class="brand__tag">Analog Clock</div>
+      </div>
+
+      <!-- =========================
+           RELÓGIO DIGITAL
+           ========================= -->
+      <div class="readout" aria-label="Digital time and date">
+        
+        <!-- Onde o horário digital será exibido via JavaScript -->
+        <div class="readout__time" id="digital-time">
+          --:--:--
+        </div>
+
+        <!-- Onde a data será exibida via JavaScript -->
+        <div class="readout__date" id="digital-date">
+          ---- ---- ----
+        </div>
+
+      </div>
+
+      <!-- =========================
+           CONTROLES (TEMAS E MODO)
+           ========================= -->
+      <div class="controls">
+
+        <!-- Botões de troca de tema -->
+        <div class="theme-switch" aria-label="Color theme">
+          <button class="theme-btn" data-theme="ocean" type="button">
+            Ocean
+          </button>
+
+          <button class="theme-btn" data-theme="sunset" type="button">
+            Sunset
+          </button>
+
+          <button class="theme-btn" data-theme="forest" type="button">
+            Forest
+          </button>
+        </div>
+
+        <!-- Botão para alternar modo escuro -->
+        <div class="mode-switch" role="button" tabindex="0">
+          Dark Mode
+        </div>
+
+      </div>
+
+    </header>
+
+    <!-- =========================
+         RELÓGIO ANALÓGICO
+         ========================= -->
+    <div class="clock">
+
+      <!-- Números do relógio (1 até 12)
+           A variável CSS --i será usada no CSS para posicionar
+           cada número ao redor do círculo -->
+
+      <label style="--i:1"><span>1</span></label>
+      <label style="--i:2"><span>2</span></label>
+      <label style="--i:3"><span>3</span></label>
+      <label style="--i:4"><span>4</span></label>
+      <label style="--i:5"><span>5</span></label>
+      <label style="--i:6"><span>6</span></label>
+      <label style="--i:7"><span>7</span></label>
+      <label style="--i:8"><span>8</span></label>
+      <label style="--i:9"><span>9</span></label>
+      <label style="--i:10"><span>10</span></label>
+      <label style="--i:11"><span>11</span></label>
+      <label style="--i:12"><span>12</span></label>
+
+      <!-- =========================
+           PONTEIROS DO RELÓGIO
+           ========================= -->
+      <div class="indicator">
+
+        <!-- Ponteiro das horas -->
+        <span class="hand hour"></span>
+
+        <!-- Ponteiro dos minutos -->
+        <span class="hand minute"></span>
+
+        <!-- Ponteiro dos segundos -->
+        <span class="hand second"></span>
+
+      </div>
+
+    </div> <!-- Fim clock -->
+
+  </div> <!-- Fim container -->
+
+</body>
+</html>
